@@ -1,14 +1,18 @@
 function add(string) {
     var res = 0;
-    if (!!string) { //0 numbers
+    if (!!string) { // 1+ numbers
         var array = string.split(',')
-        if (array.length > 1) { //2 numbers
-            res = parseInt(array[0]) + parseInt(array[1])
-        } else { //1 number
-            res = parseInt(array[0])
-        }
+        return sum(array)
     }
-    return res
+    return res // 0 numbers
+}
+
+function sum(array) {
+    var sum = 0
+    array.forEach(element => {
+        sum = sum + parseInt(element);
+    })
+    return sum;
 }
 
 
