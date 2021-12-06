@@ -1,6 +1,7 @@
 const digit = /\d/
-const firstline_regex = new RegExp("//.")
-const bad_words = ['\\', '*', '.', '+', '\/', '?', '\|']
+const firstline_regex = /\/\/./
+const bad_words = ['\\', '*', '.', '+', '\/', '?', '\|', '[', ']', '`']
+const brackets = /\/\/\[(.*?)\]/
 const zero = 0
 
 function add(string) {
@@ -10,7 +11,7 @@ function add(string) {
         var firstline = string.split('\n')[0];
         delimiter = new RegExp("\n|" + getCustomdelimiter(firstline)) //build the regex + custom delimiter or ','
         var array = string.split(delimiter)
-        return sum(array)
+        res = sum(array)
     }
     return res // 0 numbers
 }
@@ -32,7 +33,11 @@ function sum(array) {
 function getCustomdelimiter(firstline) {
     var res = "," //default delimter
     if (!digit.test(firstline.charAt(0)) && firstline_regex.test(firstline)) { //not digit and start with /
-        res = firstline.substring(2)
+        if (firstline.match(brackets)) {
+            res = firstline.substring(3, firstline.indexOf("]"))
+        } else {
+            res = firstline.substring(2, 3)
+        }
     }
     return fixdelimiter(res)
 }
@@ -57,5 +62,4 @@ function check_negatives(numbers) {
     return res
 }
 
-//console.log(add("1,2\n30000000,"))
 module.exports = add;
