@@ -5,10 +5,10 @@ const brackets = /\/\/\[(.*?)\]/
 const zero = 0
 
 function add(string) {
-    var res = zero;
+    var res = zero
     var delimiter
     if (!!string) { // 1+ numbers
-        var firstline = string.split('\n')[0];
+        var firstline = string.split('\n')[0]
         delimiter = new RegExp("\n|" + getCustomdelimiter(firstline)) //build the regex + custom delimiter or ','
         var array = string.split(delimiter)
         res = sum(array)
@@ -18,14 +18,14 @@ function add(string) {
 
 function sum(array) {
     var sum = zero
-    var negatives = check_negatives(array);
+    var negatives = check_negatives(array)
     if (negatives.length > 0) {
         throw new TypeError('negatives not allowed ' + negatives.toString())
     } else {
         array.forEach(element => {
-            sum = sum + (isNaN(parseInt(element)) || parseInt(element) > 1000 ? zero : parseInt(element)); //if "" or not parsable element -> 0
+            sum = sum + (isNaN(parseInt(element)) || parseInt(element) > 1000 ? zero : parseInt(element)) //if "" or not parsable element -> 0
         })
-        return sum;
+        return sum
     }
 
 }
@@ -51,7 +51,7 @@ function fixdelimiter(string) {
             res = res + string[i]
         }
     }
-    return res;
+    return res
 }
 
 function check_negatives(numbers) {
