@@ -3,7 +3,7 @@
 ## HOW TO RUN 
 
 * `npm install`. 
-* Edit the `/src/input.txt` file with the string you wanna input. Only correct input have been tested, any incorrect input may not produce an output.
+* Edit the `/src/input.txt` file with the string you want to input. Only correct input have been tested, any incorrect input may not produce an output.
 * `npm run start`. 
 
 On the Github Actions page you can see the pipeline with around 30 tests done & passed.
