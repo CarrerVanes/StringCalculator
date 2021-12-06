@@ -18,12 +18,11 @@ function add(string) {
 function sum(array) {
     var sum = zero
     var negatives = check_negatives(array);
-    console.log(negatives)
     if (negatives.length > 0) {
         throw new TypeError('negatives not allowed ' + negatives.toString())
     } else {
         array.forEach(element => {
-            sum = sum + (isNaN(parseInt(element)) ? zero : parseInt(element)); //if "" or not parsable element -> 0
+            sum = sum + (isNaN(parseInt(element)) || parseInt(element) > 1000 ? zero : parseInt(element)); //if "" or not parsable element -> 0
         })
         return sum;
     }
@@ -58,5 +57,5 @@ function check_negatives(numbers) {
     return res
 }
 
-//console.log(add("-1,-2\n-3,"))
+//console.log(add("1,2\n30000000,"))
 module.exports = add;

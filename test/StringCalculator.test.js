@@ -76,7 +76,7 @@ test('\"*\" as a delimiter: \"//*\n1*2\n3\n4*5\"-> 15', () => {
 });
 
 test('\"****\" as a delimiter: \"//****\n1****2\n3\n4****5\"-> 15', () => {
-    expect(add("//*\n1*2\n3\n4*5")).toBe(15);
+    expect(add("//****\n1****2\n3\n4****5")).toBe(15);
 });
 
 test('\"+\" as a delimiter: \"//+\n1+2\n3\n4+5\"-> 15', () => {
@@ -87,7 +87,7 @@ test('\"+?\" as a delimiter: \"//+\n1+2\n3\n4+5\"-> 15', () => {
     expect(add("//+?\n1+?2\n3\n4+?5")).toBe(15);
 });
 
-test('\"*?\" as a delimiter: \"//+?\n1+?2\n3\n4+?5\"-> 15', () => {
+test('\"*?\" as a delimiter: \"//*?\n1*?2\n3\n4*?5\"-> 15', () => {
     expect(add("//*?\n1*?2\n3\n4*?5")).toBe(15);
 });
 
@@ -105,4 +105,16 @@ test('numbers below 0: \"//;\n-11;2\n3\n4;-5\"-> negatives not allowed -11,-5', 
 
 test('numbers below 0: \"-1,-2,-3,-4,-5\"-> negatives not allowed -1,-2,-3,-4,-5', () => {
     expect(() => { add("-1,-2,-3,-4,-5") }).toThrow('negatives not allowed -1,-2,-3,-4,-5');;
+});
+
+test('number > 1000: \"1,2\n3000\"-> 3', () => {
+    expect(add("1,2\n3000,")).toBe(3);
+});
+
+test('\"+?\" as a delimiter and number > 1000: \"//+\n1+2\n3\n4+5000\"-> 10', () => {
+    expect(add("//+?\n1+?2\n3\n4+?5000")).toBe(10);
+});
+
+test('1000+18-> 1018', () => {
+    expect(add("1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1000,1,1,1")).toBe(1018);
 });
