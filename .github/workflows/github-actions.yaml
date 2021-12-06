@@ -20,3 +20,5 @@ jobs:
             node-version: '12'
       - run: npm ci
       - run: npm run test
+      - run: echo "Testing start script with demo file:"
+      - run: npm run start
