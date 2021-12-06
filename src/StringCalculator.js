@@ -1,6 +1,6 @@
 const digit = /\d/
 const firstline_regex = /\/\/./
-const bad_words = ['\\', '*', '.', '+', '\/', '?', '\|', '[', ']', '`']
+const bad_words = ['\\', '*', '.', '+', '\/', '?', '\|', '[', ']', '`', '(', ')', '{', '}']
 const brackets = /\/\/\[(.*?)\]/
 const zero = 0
 
