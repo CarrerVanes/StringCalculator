@@ -8,8 +8,7 @@ function add(string) {
     var delimiter
     if (!!string) { // 1+ numbers
         var firstline = string.split('\n')[0];
-        var custom_delimiter = getCustomdelimiter(firstline) //get the custom delimiter or ',' if no custom delimiter
-        delimiter = new RegExp("\n|" + custom_delimiter) //build the regex
+        delimiter = new RegExp("\n|" + getCustomdelimiter(firstline)) //build the regex + custom delimiter or ','
         var array = string.split(delimiter)
         return sum(array)
     }
@@ -18,12 +17,18 @@ function add(string) {
 
 function sum(array) {
     var sum = zero
-    array.forEach(element => {
-        sum = sum + (isNaN(parseInt(element)) ? zero : parseInt(element)); //if "" or not parsable element -> 0
-    })
-    return sum;
-}
+    var negatives = check_negatives(array);
+    console.log(negatives)
+    if (negatives.length > 0) {
+        throw new TypeError('negatives not allowed ' + negatives.toString())
+    } else {
+        array.forEach(element => {
+            sum = sum + (isNaN(parseInt(element)) ? zero : parseInt(element)); //if "" or not parsable element -> 0
+        })
+        return sum;
+    }
 
+}
 
 function getCustomdelimiter(firstline) {
     var res = "," //default delimter
@@ -45,5 +50,13 @@ function fixdelimiter(string) {
     return res;
 }
 
+function check_negatives(numbers) {
+    res = []
+    numbers.forEach(element => {
+        if (element < zero) res.push(element)
+    })
+    return res
+}
 
+//console.log(add("-1,-2\n-3,"))
 module.exports = add;

@@ -83,12 +83,26 @@ test('\"+\" as a delimiter: \"//+\n1+2\n3\n4+5\"-> 15', () => {
     expect(add("//+\n1+2\n3\n4+5")).toBe(15);
 });
 
-
 test('\"+?\" as a delimiter: \"//+\n1+2\n3\n4+5\"-> 15', () => {
     expect(add("//+?\n1+?2\n3\n4+?5")).toBe(15);
 });
 
-
 test('\"*?\" as a delimiter: \"//+?\n1+?2\n3\n4+?5\"-> 15', () => {
     expect(add("//*?\n1*?2\n3\n4*?5")).toBe(15);
+});
+
+test('number below 0: \"-1,2\n3\"-> negatives not allowed -1', () => {
+    expect(() => { add("-1,2\n3,") }).toThrow('negatives not allowed -1');
+});
+
+test('number below 0: \"//;\n1;2\n3\n4;-5\"-> negatives not allowed -5', () => {
+    expect(() => { add("//;\n1;2\n3\n4;-5") }).toThrow('negatives not allowed -5');;
+});
+
+test('numbers below 0: \"//;\n-11;2\n3\n4;-5\"-> negatives not allowed -11,-5', () => {
+    expect(() => { add("//;\n-11;2\n3\n4;-5") }).toThrow('negatives not allowed -11,-5');;
+});
+
+test('numbers below 0: \"-1,-2,-3,-4,-5\"-> negatives not allowed -1,-2,-3,-4,-5', () => {
+    expect(() => { add("-1,-2,-3,-4,-5") }).toThrow('negatives not allowed -1,-2,-3,-4,-5');;
 });
